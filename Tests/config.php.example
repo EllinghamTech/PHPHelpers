@@ -1,0 +1,5 @@
+<?php
+define('ELLINGHAM_DB_HOST', 'localhost');
+define('ELLINGHAM_DB_NAME', 'DatabaseName');
+define('ELLINGHAM_DB_USER', 'Username');
+define('ELLINGHAM_DB_PASS', 'Password');

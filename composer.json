@@ -1,0 +1,25 @@
+{
+  "name": "EllinghamTech/PHPHelpers",
+  "type": "library",
+  "license": "MIT",
+  "version": "dev-master",
+  "description": "A general library for PHP containing some common functionality with easy extensibility",
+  "authors": [
+	{
+	  "name": "Ellingham Technologies Ltd",
+	  "email": "dev@ellinghamtech.co.uk"
+	}
+  ],
+  "require": {
+	"php": ">=7.1.0",
+	"ext-pdo": "*",
+	"ext-curl": "*",
+	"ext-json": "*"
+  },
+  "autoload": {
+	"psr-4": {
+	  "EllinghamTech\\": "src/EllinghamTech/"
+	}
+  },
+  "minimum-stability": "dev"
+}
