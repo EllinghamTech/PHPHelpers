@@ -1,6 +1,14 @@
 **Warning: In Development and not complete**
-# Ellingham General Library for PHP
-General Library for additional basic functionality for any PHP base service.
+# Ellingham PHP Helpers
+Some PHP Helpers for common features used within PHP, such as Sessions and Databases.
+
+- Database Wrapper functions (currently only MySQL/MariaDB using PDO)
+- Sessions for "NoLogin" (to store Session Messages) and "SingleUse" (for GDPR)
+- Pagination - helpers for using pagination with some HTML helper methods
+- Recaptcha - Simple helper for withing with Google's Recaptcha V2
+- Templating - A simple templating class that does away with top.php, bottom.php etc.
+
+Released under the MIT licence.  Use as you please but please include a copyright notice "Copyright (c) 2019 Ellingham Technologies Ltd".  This can be placed on a separate attribution page, warranties page, etc.  Under the MIT licence, we offer no warrenty for use of this library.  Public contributions to EllinghamTech/PHPHelpers are welcome.
 
 ## Installation
 ### With Composer
