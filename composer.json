@@ -2,7 +2,6 @@
   "name": "ellingham-technologies/phphelpers",
   "type": "library",
   "license": "MIT",
-  "version": "dev-master",
   "description": "A general library for PHP containing some common functionality with easy extensibility",
   "authors": [
 	{
