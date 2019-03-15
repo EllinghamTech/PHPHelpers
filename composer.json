@@ -21,7 +21,11 @@
   },
   "autoload": {
 	"psr-4": {
-	  "EllinghamTech\\": "src/EllinghamTech/"
+	  "EllinghamTech\\Database": "src/EllinghamTech/Database/",
+	  "EllinghamTech\\PaginationHelpers": "src/EllinghamTech/PaginationHelpers/",
+	  "EllinghamTech\\Recaptcha": "src/EllinghamTech/Recaptcha/",
+	  "EllinghamTech\\Session": "src/EllinghamTech/Session/",
+	  "EllinghamTech\\Templating": "src/EllinghamTech/Templating/"
 	}
   },
   "minimum-stability": "dev"
