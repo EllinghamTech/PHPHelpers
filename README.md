@@ -9,6 +9,13 @@ Using Composer (https://getcomposer.org) simply run
 composer require ellingham-technologies/phphelpers
 ```
 
+or add this line to the require section of your composer.json file and use composer to update/install:
+```
+"ellingham-technologies/phphelpers": "~0.1",
+```
+
+*As this is early days, we should point out that the library is quite limited.  You can use the "dev-master" release (which is the latest and greatest) - but this could always lead to site-breakages if there is an error somewhere in the development library - so don't use on production sites.*
+
 ### Without Composer
 Not a problem!
 
