@@ -2,10 +2,10 @@
 require('../../src/EllinghamTech/AutoLoad.php');
 require('../config.php');
 
-$database = new EllinghamTech\Database\MySQL\Wrapper();
+$database = new EllinghamTech\Database\SQL\Wrapper();
 try
 {
-	$database->init(ELLINGHAM_DB_HOST, ELLINGHAM_DB_USER, ELLINGHAM_DB_PASS, ELLINGHAM_DB_NAME);
+	$database->MySQLConnect(ELLINGHAM_DB_HOST, ELLINGHAM_DB_USER, ELLINGHAM_DB_PASS, ELLINGHAM_DB_NAME);
 }
 catch (Exception $e)
 {

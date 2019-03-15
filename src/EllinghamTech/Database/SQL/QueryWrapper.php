@@ -1,9 +1,7 @@
 <?php
-namespace EllinghamTech\Database\MySQL;
+namespace EllinghamTech\Database\SQL;
 
-use EllinghamTech\Database\Interfaces\ISQLQuery;
-
-class QueryWrapper implements ISQLQuery
+class QueryWrapper
 {
 	/** @var Wrapper The Ellingham Wrapper Object */
 	protected $mysql;

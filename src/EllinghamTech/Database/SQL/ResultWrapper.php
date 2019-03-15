@@ -1,9 +1,7 @@
 <?php
-namespace EllinghamTech\Database\MySQL;
+namespace EllinghamTech\Database\SQL;
 
-use EllinghamTech\Database\Interfaces\ISQLResult;
-
-class ResultWrapper implements ISQLResult
+class ResultWrapper
 {
 	/** @var \PDOStatement Result */
 	protected $result;
