@@ -9,7 +9,7 @@ class AutoLoad
 		array_shift($className);
 		$className = implode('/', $className);
 
-		if (file_exists(__DIR__ . 'AutoLoad.php/' .$className.'.php')) require(__DIR__ . 'AutoLoad.php/' .$className.'.php');
+		if (file_exists(__DIR__ .'/'.$className.'.php')) require(__DIR__ .'/'.$className.'.php');
 		else if (file_exists($className.'.php')) require($className.'.php');
 	}
 }
