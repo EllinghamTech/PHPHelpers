@@ -15,6 +15,10 @@
 	"ext-curl": "*",
 	"ext-json": "*"
   },
+  "suggest": {
+	"ext-sqlite" : "For using SQLite in the Database Wrappers",
+	"ext-mysql" : "For using MySQL/MariaDB in the Database Wrappers"
+  },
   "autoload": {
 	"psr-4": {
 	  "EllinghamTech\\": "src/EllinghamTech/"
