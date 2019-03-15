@@ -8,6 +8,15 @@ class Wrapper
 	/** @var string Last Query Performed */
 	protected $last_query;
 
+	/**
+	 * @param string $host Hostname
+	 * @param string $user Username
+	 * @param string $pass Password
+	 * @param string $databaseName Database Name
+	 * @param null|array $pdoOptions Array of PDO Options
+	 *
+	 * @throws \Exception If cannot connect
+	 */
 	public function MySQLConnect($host, $user, $pass, $databaseName, $pdoOptions=null)
 	{
 		if($this->db_link != null) return;
@@ -22,6 +31,30 @@ class Wrapper
 		{
 			$this->db_link = null;
 			throw new \Exception("Failed to load database connection: ".$e->getMessage());
+		}
+	}
+
+	/**
+	 * Opens an SQLite connection using PDO_SQLITE
+	 *
+	 * @param string $sqlite_file_location Path to SQLite file
+	 *
+	 * @throws \Exception If cannot open/create
+	 */
+	public function SQLiteConnect($sqlite_file_location)
+	{
+		if($this->db_link != null) return;
+
+		$dsn = 'sqlite:'.$sqlite_file_location;
+
+		try
+		{
+			$this->db_link = new \PDO($dsn);
+		}
+		catch(\PDOException $e)
+		{
+			$this->db_link = null;
+			throw new \Exception("Failed to open database: ".$e->getMessage());
 		}
 	}
 
