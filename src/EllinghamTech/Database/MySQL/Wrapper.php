@@ -32,6 +32,17 @@ class Wrapper implements ISQLTransactions
 		}
 	}
 
+	/**
+	 * Uses an existing PDO connection instead of creating
+	 * a new connection to the database.
+	 *
+	 * @param \PDO $pdoObject An existing PDO connection
+	 */
+	public function useExistingConnection(\PDO $pdoObject)
+	{
+		$this->db_link = $pdoObject;
+	}
+
 	public function prepare($query_string)
 	{
 		if($this->db_link == null) throw new \Exception('Not connected to database');
