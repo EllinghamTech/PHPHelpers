@@ -2,6 +2,41 @@
 # Ellingham General Library for PHP
 General Library for additional basic functionality for any PHP base service.
 
+## Installation
+### With Composer
+Using Composer (https://getcomposer.org) simply run
+```
+composer require ellingham-technologies/phphelpers
+```
+
+### Without Composer
+Not a problem!
+
+We've included a custom AutoLoader (src/EllinghamTech/AutoLoad.php) that can be used or you can
+include the classes individually as you please. 
+
+#### Using the AutoLoader
+Simply include the AutoLoad.php file and start using!
+
+```php
+require('/path/to/EllinghamTech/AutoLoad.php');
+$template = new EllinghamTech/Templating/Template('My Website!'); // Template class is now autoloaded by PHP
+```
+
+#### Without the AutoLoader (not recommended)
+Ensure you include any require interfaces and abstract classes, etc.
+
+E.g.
+```php
+require('/path/to/EllinghamTech/Session/IBasicSession.php'); // Interface used by SingleUse session class
+require('/path/to/EllinghamTech/Session/SingleUse.php');
+
+$singleUseSession = new EllinghamTech/Session/SingleUse();
+$singleUseSession->setSessionMessage('contact-us', 'Please check all the fields to ensure you have entered the correct details');
+```
+
+# What's Inside
+
 ## Sessions
 ### No Login
 NoLogin is a basic session wrapper that deals with holder user error messages and notifications.
