@@ -2,7 +2,7 @@
 # Ellingham PHP Helpers
 Some PHP Helpers for common features used within PHP, such as Sessions and Databases.
 
-- Database Wrapper functions (currently only MySQL/MariaDB using PDO)
+- Database Wrapper functions (for SQL databases, MySQL/MariaDB/SQLite)
 - Sessions for "NoLogin" (to store Session Messages) and "SingleUse" (for GDPR)
 - Pagination - helpers for using pagination with some HTML helper methods
 - Recaptcha - Simple helper for withing with Google's Recaptcha V2
