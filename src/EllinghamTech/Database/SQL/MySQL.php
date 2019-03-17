@@ -3,6 +3,11 @@ namespace EllinghamTech\Database\SQL;
 
 class MySQL extends Wrapper
 {
+	public function __construct()
+	{
+		$this->database_type = 'MySQL';
+	}
+
 	public function connect($host, $user, $pass, $databaseName, $pdoOptions=null)
 	{
 		if($this->db_link != null) return;

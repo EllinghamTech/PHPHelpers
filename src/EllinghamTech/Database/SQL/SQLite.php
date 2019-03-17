@@ -3,6 +3,11 @@ namespace EllinghamTech\Database\SQL;
 
 class SQLite extends Wrapper
 {
+	public function __construct()
+	{
+		$this->database_type = 'SQLite';
+	}
+
 	/**
 	 * Opens an SQLite connection using PDO_SQLITE
 	 *

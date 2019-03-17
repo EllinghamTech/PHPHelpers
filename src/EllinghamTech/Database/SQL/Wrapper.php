@@ -8,6 +8,8 @@ class Wrapper
 	/** @var string Last Query Performed */
 	protected $last_query;
 
+	public $database_type ='SQL';
+
 	/**
 	 * Uses an existing PDO connection instead of creating
 	 * a new connection to the database.
