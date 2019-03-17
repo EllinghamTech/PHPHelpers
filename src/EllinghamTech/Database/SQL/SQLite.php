@@ -15,7 +15,7 @@ class SQLite extends Wrapper
 	 *
 	 * @throws \Exception If cannot open/create
 	 */
-	public function SQLiteConnect($sqlite_file_location)
+	public function connect($sqlite_file_location)
 	{
 		if($this->db_link != null) return;
 
