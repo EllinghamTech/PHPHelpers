@@ -18,7 +18,7 @@ interface IBasicSession
 	 * @param string $name Message name
 	 * @return array|null
 	 */
-	public function getSessionMessages($name);
+	public function getSessionMessages($name) : ?array;
 
 	/**
 	 * Checks if any session messages exist for a $name

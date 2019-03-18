@@ -44,7 +44,7 @@ class SingleUse implements IBasicSession
 		return true;
 	}
 
-	public function getSessionMessages($name)
+	public function getSessionMessages($name) : ?array
 	{
 		return (isset($this->session['msg'][$name]) ? $this->session['msg'][$name] : null);
 	}

@@ -24,7 +24,7 @@ class NoLogin implements IBasicSession
 		return true;
 	}
 
-	public function getSessionMessages($name)
+	public function getSessionMessages($name) : ?array
 	{
 		return (isset($_SESSION['msg'][$name]) ? $_SESSION['msg'][$name] : null);
 	}
