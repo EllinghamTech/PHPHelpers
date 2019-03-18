@@ -17,7 +17,7 @@ class NoLogin implements IBasicSession
 		@session_start();
 	}
 
-	public function setSessionMessage($name, $value)
+	public function setSessionMessage($name, $value) : bool
 	{
 		@session_start();
 		$_SESSION['msg'][$name][] = $value;
@@ -29,18 +29,18 @@ class NoLogin implements IBasicSession
 		return (isset($_SESSION['msg'][$name]) ? $_SESSION['msg'][$name] : null);
 	}
 
-	public function checkSessionMessages($name)
+	public function checkSessionMessages($name) : bool
 	{
 		return (isset($_SESSION['msg'][$name]) ? true : false);
 	}
 
-	public function clearSessionMessages($name)
+	public function clearSessionMessages($name) : void
 	{
 		if(isset($_SESSION['msg'][$name]))
 			unset($_SESSION['msg'][$name]);
 	}
 
-	public function clearAllSessionMessages()
+	public function clearAllSessionMessages() : void
 	{
 		if(isset($_SESSION['msg']))
 			unset($_SESSION['msg']);
