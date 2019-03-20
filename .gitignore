@@ -78,3 +78,6 @@ Tests/config.php
 # Tests PHPUnit stuff
 phpunit.phar
 .phpunit.result.cache
+
+## Composer
+vendor/
