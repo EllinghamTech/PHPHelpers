@@ -26,7 +26,7 @@ class ResultWrapper
 	/**
 	 * Returns the number of rows affected
 	 */
-	public function numRows()
+	public function numRows() : int
 	{
 		return $this->result->rowCount();
 	}
@@ -34,7 +34,7 @@ class ResultWrapper
 	/**
 	 * Returns the next row of data
 	 **/
-	public function fetchArray()
+	public function fetchArray() : array
 	{
 		return $this->result->fetch(\PDO::FETCH_ASSOC);
 	}
@@ -47,13 +47,12 @@ class ResultWrapper
 		return $this->result->errorInfo();
 	}
 
-	public function isSuccess()
+	public function isSuccess() : bool
 	{
-		if(is_bool($this->success)) return null;
 		return (bool)$this->success;
 	}
 
-	public function insertId()
+	public function insertId() : ?int
 	{
 		return $this->insert_id;
 	}
