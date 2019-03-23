@@ -34,7 +34,7 @@ class ResultWrapper
 	/**
 	 * Returns the next row of data
 	 **/
-	public function fetchArray() : array
+	public function fetchArray() : ?array
 	{
 		return $this->result->fetch(\PDO::FETCH_ASSOC);
 	}
