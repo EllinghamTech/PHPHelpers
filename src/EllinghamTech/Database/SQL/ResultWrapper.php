@@ -36,7 +36,11 @@ class ResultWrapper
 	 **/
 	public function fetchArray() : ?array
 	{
-		return $this->result->fetch(\PDO::FETCH_ASSOC);
+		$arr = $this->result->fetch(\PDO::FETCH_ASSOC);
+
+		if(!is_array($arr)) return null;
+
+		return $arr;
 	}
 
 	/**
