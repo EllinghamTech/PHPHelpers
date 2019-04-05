@@ -37,7 +37,7 @@ class PaginationBase
 	 * @throws \InvalidArgumentException If $value is not an integer or $name is invalid
 	 * @throws \RangeException If the value is not positive
 	 */
-	public function __set($name, $value)
+	public function __set(string $name, $value) : void
 	{
 		if(!is_int($value)) throw new \InvalidArgumentException('Value must be an integer');
 		if($value < 0) throw new \RangeException('Value must be positive');
@@ -86,7 +86,7 @@ class PaginationBase
 	 * @throws \InvalidArgumentException If $value is not an integer or $name is invalid
 	 * @throws \RangeException If the value is not positive
 	 */
-	public function set($name, $value)
+	public function set($name, $value) : void
 	{
 		$this->__set($name, $value);
 	}
@@ -95,12 +95,12 @@ class PaginationBase
 	 * Gets the offset for the current page.
 	 *
 	 * @param int|null $currentPage The current page (if null uses $currentPage property)
-	 * @return bool|int The offset for the page, false on failure
+	 * @return int The offset for the page
 	 *
 	 * @throws \InvalidArgumentException $currentPage is not an integer (or null)
 	 * @throws \RangeException $currentPage is negative
 	 */
-	public function getOffsetForPage($currentPage=null)
+	public function getOffsetForPage(?int $currentPage=null) : int
 	{
 		if($currentPage == null)
 			$currentPage = $this->currentPage;
@@ -118,16 +118,16 @@ class PaginationBase
 	 *
 	 * @param int|null $total The total number of results (if null uses $total property)
 	 * @param int|null $perPage The total number of results per page (if null uses $perPage property)
-	 * @return bool|int The total number of pages, false on failure
+	 * @return null|int The total number of pages, null on failure
 	 *
 	 * @throws \InvalidArgumentException If total or perPage is not an integer
 	 * @throws \RangeException If total or perPage is negative
 	 */
-	public function calculateTotalPages($total=null, $perPage=null)
+	public function calculateTotalPages(?int $total=null, ?int $perPage=null) : ?int
 	{
 		if($total == null)
 		{
-			if($this->total == null) return false;
+			if($this->total == null) return null;
 
 			$total = $this->total;
 		}
@@ -137,7 +137,7 @@ class PaginationBase
 
 		if($perPage == null)
 		{
-			if($this->perPage == null) return false;
+			if($this->perPage == null) return null;
 
 			$perPage = $this->perPage;
 		}
@@ -152,13 +152,13 @@ class PaginationBase
 	 * Returns the partial SQL query (LIMIT part).
 	 *
 	 * @param string $type The SQL type (future use?)
-	 * @return bool|string The partial SQL query, false on failure
+	 * @return bool|string The partial SQL query, null on failure
 	 */
-	public function getOffsetString($type = 'sql')
+	public function getOffsetString(string $type = 'sql') : ?string
 	{
 		$offset = $this->getOffsetForPage();
 
-		if($offset == false) return false;
+		if($offset == false) return null;
 
 		switch($type)
 		{
@@ -167,6 +167,6 @@ class PaginationBase
 				return 'LIMIT '.$this->perPage.' OFFSET '.$offset;
 		}
 
-		return false;
+		return null;
 	}
 };
