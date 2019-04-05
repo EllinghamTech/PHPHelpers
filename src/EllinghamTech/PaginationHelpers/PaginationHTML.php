@@ -221,12 +221,18 @@ class PaginationHTML extends PaginationBase
 				$start = ceil($this->currentPage - ($otherItems / 2));
 
 			$max = floor($this->currentPage + ($otherItems / 2));
+
+			if($max > $this->pages)
+			{
+				$start = 1;
+				$max = $this->pages;
+			}
 		}
 
 		if($withFirst)
 			echo '<option value="1">', $this->names['first'], '</option>';
 
-		for($x=$start; $x<$max; $x++)
+		for($x=$start; $x<=$max; $x++)
 		{
 			if($x == $this->currentPage)
 				echo '<option value="', $x, '" selected>', $x, '</option>';
