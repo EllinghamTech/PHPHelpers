@@ -14,9 +14,12 @@ class ResultWrapper
 
 	/**
 	 * Set-up the instance
+	 *
 	 * @param \PDOStatement $pdo_result The PDO Statement object
+	 * @param bool|null $success
+	 * @param mixed $insert_id
 	 */
-	public function __construct($pdo_result, $success=null, $insert_id=null)
+	public function __construct(\PDOStatement $pdo_result, ?bool $success=null, $insert_id=null)
 	{
 		$this->result = $pdo_result;
 		$this->success = $success;

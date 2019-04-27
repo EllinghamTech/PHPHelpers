@@ -8,7 +8,7 @@ class Wrapper
 	/** @var string Last Query Performed */
 	protected $last_query;
 
-	public $database_type ='SQL';
+	public $database_type = 'SQL';
 
 	/**
 	 * Uses an existing PDO connection instead of creating
@@ -36,7 +36,7 @@ class Wrapper
 	 *
 	 * @throws /Exception
 	 */
-	public function prepare($query_string)
+	public function prepare(string $query_string) : QueryWrapper
 	{
 		if($this->db_link == null) throw new \Exception('Not connected to database');
 		return new QueryWrapper($this, $query_string);
@@ -51,7 +51,7 @@ class Wrapper
 	 *
 	 * @throws \Exception
 	 */
-	public function performQuery($query_string, $inputs = null)
+	public function performQuery(string $query_string, $inputs = null) : ResultWrapper
 	{
 		if($this->db_link == null) throw new \Exception('Not connected to database');
 		$res = new QueryWrapper($this, $query_string);
@@ -65,7 +65,7 @@ class Wrapper
 	 *
 	 * @throws \Exception
 	 */
-	public function transaction_begin()
+	public function transaction_begin() : bool
 	{
 		if($this->db_link == null) throw new \Exception('Not connected to database');
 		return $this->db_link->beginTransaction();
@@ -78,7 +78,7 @@ class Wrapper
 	 *
 	 * @throws \Exception
 	 */
-	public function transaction_rollback()
+	public function transaction_rollback() : bool
 	{
 		if($this->db_link == null) throw new \Exception('Not connected to database');
 		return $this->db_link->rollBack();
@@ -91,7 +91,7 @@ class Wrapper
 	 *
 	 * @throws \Exception
 	 */
-	public function transaction_commit()
+	public function transaction_commit() : bool
 	{
 		if($this->db_link == null) throw new \Exception('Not connected to database');
 		return $this->db_link->commit();
@@ -105,7 +105,7 @@ class Wrapper
 	 *
 	 * @throws \Exception
 	 */
-	public function transaction_savepointCreate($name)
+	public function transaction_savepointCreate(string $name) : bool
 	{
 		if($this->db_link == null) throw new \Exception('Not connected to database');
 		return $this->db_link->query('SAVEPOINT '.$name);
@@ -119,7 +119,7 @@ class Wrapper
 	 *
 	 * @throws \Exception
 	 */
-	public function transaction_savepointRollback($name)
+	public function transaction_savepointRollback(string $name) : bool
 	{
 		if($this->db_link == null) throw new \Exception('Not connected to database');
 		return $this->db_link->query('ROLLBACK TO '.$name);
@@ -130,7 +130,7 @@ class Wrapper
 	 *
 	 * @return \PDO|null
 	 */
-	public function getDBLink()
+	public function getDBLink() : ?\PDO
 	{
 		return $this->db_link;
 	}

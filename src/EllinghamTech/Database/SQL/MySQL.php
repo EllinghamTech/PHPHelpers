@@ -8,7 +8,7 @@ class MySQL extends Wrapper
 		$this->database_type = 'MySQL';
 	}
 
-	public function connect($host, $user, $pass, $databaseName, $pdoOptions=null)
+	public function connect(string $host, string $user, string $pass, string $databaseName, ?array $pdoOptions=null) : void
 	{
 		if($this->db_link != null) return;
 

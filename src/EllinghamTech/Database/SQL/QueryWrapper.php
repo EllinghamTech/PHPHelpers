@@ -23,7 +23,7 @@ class QueryWrapper
 	 *
 	 * @throws QueryFailed QueryFailed if the QueryWrapper could not prepare the query
 	 */
-	public function __construct($parent, $query)
+	public function __construct(Wrapper $parent, string $query)
 	{
 		$this->mysql = $parent;
 		$this->pdo = $parent->getDBLink();
@@ -38,13 +38,15 @@ class QueryWrapper
 	 * @param string|int $name Name/number of value to bind
 	 * @param string $value Value to bind
 	 * @param string $type Type of value (string, int)
+	 *
+	 * @return bool True on Success
 	 **/
-	public function bindValue($name, $value, $type='string')
+	public function bindValue(string $name, $value, string $type='string') : bool
 	{
 		if($type == 'int') $type = \PDO::PARAM_INT;
 		else $type = \PDO::PARAM_STR;
 
-		$this->pdo_stmt->bindValue($name, $value, $type);
+		return $this->pdo_stmt->bindValue($name, $value, $type);
 	}
 
 	/**
@@ -54,7 +56,7 @@ class QueryWrapper
 	 *
 	 * @throws \Exception
 	 */
-	public function execute($values=null)
+	public function execute($values=null) : ResultWrapper
 	{
 		$insert_id = null;
 
