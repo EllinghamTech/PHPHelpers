@@ -47,7 +47,7 @@ class Template
 	 * @param string $siteName Site Name
 	 * @param string $titleSeparator Title Separator
 	 */
-	public function __construct($siteName=null, $titleSeparator='-')
+	public function __construct(?string $siteName=null, string $titleSeparator='-')
 	{
 		if($siteName != null)
 			$this->siteName = $siteName;
@@ -61,16 +61,15 @@ class Template
 	 * @param string $value Value of the Meta data field
 	 * @return bool True on success
 	 **/
-	public function setMeta($name, $value)
+	public function setMeta(string $name, string $value) : void
 	{
 		$this->meta[$name] = $value;
-		return true;
 	}
 
 	/**
 	 * Creates and returns the page title from inputted variables
 	 **/
-	public function getTitle()
+	public function getTitle() : string
 	{
 		if($this->siteName != null)
 			return (strlen($this->title) > 0 ? $this->title.' '.$this->titleSeparator.' ' : '').$this->siteName;
@@ -81,7 +80,7 @@ class Template
 	/**
 	 * Returns the set HTML headers
 	 **/
-	function htmlHeaders()
+	function htmlHeaders() : string
 	{
 		$return = '';
 
@@ -95,8 +94,10 @@ class Template
 
 	/**
 	 * Sets a HTML header
-	 **/
-	function setHtmlHeader($header)
+	 *
+	 * @param string $header The HTML header to add
+	 */
+	function setHtmlHeader(string $header) : void
 	{
 		$this->headers[] = $header;
 	}
