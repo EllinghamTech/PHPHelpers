@@ -32,7 +32,7 @@ class RecaptchaV2
 	 * @param string $key Google Recaptcha Key
 	 * @param string $secret Google Recaptcha Secret
 	 */
-	public function __construct($key, $secret)
+	public function __construct(string $key, string $secret)
 	{
 		$this->key = $key;
 		$this->secret = $secret;
@@ -45,7 +45,7 @@ class RecaptchaV2
 	 *
 	 * @return string
 	 */
-	public function recaptcha_header()
+	public function recaptcha_header() : string
 	{
 		return '<script src=\'https://www.google.com/recaptcha/api.js\'></script>';
 	}
@@ -55,7 +55,7 @@ class RecaptchaV2
 	 *
 	 * @return string
 	 */
-	public function recaptcha_v2()
+	public function recaptcha_v2() : string
 	{
 		return '<div class="g-recaptcha" data-sitekey="'.$this->key.'"></div>';
 	}
@@ -66,7 +66,7 @@ class RecaptchaV2
 	 *
 	 * @return bool Verified?
 	 */
-	public function verify()
+	public function verify() : bool
 	{
 		if(isset($_POST['g-recaptcha-response']))
 			$response = $_POST['g-recaptcha-response'];
