@@ -10,7 +10,7 @@ interface IBasicSession
 	 * @param string $value The value of the message
 	 * @return bool True on success
 	 */
-	public function setSessionMessage($name, $value) : bool;
+	public function setSessionMessage(string $name, string $value) : bool;
 
 	/**
 	 * Gets session messages for a $name
@@ -18,7 +18,7 @@ interface IBasicSession
 	 * @param string $name Message name
 	 * @return array|null
 	 */
-	public function getSessionMessages($name) : ?array;
+	public function getSessionMessages(string $name) : ?array;
 
 	/**
 	 * Checks if any session messages exist for a $name
@@ -26,7 +26,7 @@ interface IBasicSession
 	 * @param string $name Message nem
 	 * @return bool True if exists, false otherwise
 	 */
-	public function checkSessionMessages($name) : bool;
+	public function checkSessionMessages(string $name) : bool;
 
 	/**
 	 * Clears session messages for a $name
@@ -34,7 +34,7 @@ interface IBasicSession
 	 * @param string $name Message name
 	 * @return void
 	 */
-	public function clearSessionMessages($name) : void;
+	public function clearSessionMessages(string $name) : void;
 
 	/**
 	 * Clears all session messages

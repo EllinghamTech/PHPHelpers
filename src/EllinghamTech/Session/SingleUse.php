@@ -37,24 +37,24 @@ class SingleUse implements IBasicSession
 		}
 	}
 
-	public function setSessionMessage($name, $value) : bool
+	public function setSessionMessage(string $name, $value) : bool
 	{
 		@session_start();
 		$_SESSION['msg'][$name][] = $value;
 		return true;
 	}
 
-	public function getSessionMessages($name) : ?array
+	public function getSessionMessages(string $name) : ?array
 	{
 		return (isset($this->session['msg'][$name]) ? $this->session['msg'][$name] : null);
 	}
 
-	public function checkSessionMessages($name) : bool
+	public function checkSessionMessages(string $name) : bool
 	{
 		return (isset($this->session['msg'][$name]) ? true : false);
 	}
 
-	public function clearSessionMessages($name) : void
+	public function clearSessionMessages(string $name) : void
 	{
 		if(isset($this->session['msg'][$name]))
 			unset($this->session['msg'][$name]);
