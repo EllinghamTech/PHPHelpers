@@ -1,6 +1,8 @@
 <?php
 namespace EllinghamTech\Database\SQL;
 
+use EllinghamTech\Exceptions\Data\QueryFailed;
+
 class QueryWrapper
 {
 	/** @var Wrapper The Ellingham Wrapper Object */
@@ -18,12 +20,17 @@ class QueryWrapper
 	 * Sets up the instance
 	 * @param Wrapper $parent The Wrapper object
 	 * @param string $query The query string
+	 *
+	 * @throws QueryFailed QueryFailed if the QueryWrapper could not prepare the query
 	 */
 	public function __construct($parent, $query)
 	{
 		$this->mysql = $parent;
 		$this->pdo = $parent->getDBLink();
 		$this->pdo_stmt = $this->pdo->prepare($query);
+
+		if($this->pdo_stmt === null)
+			throw new QueryFailed($query, 'Statement returned NULL, possibly a query syntax error');
 	}
 
 	/**
