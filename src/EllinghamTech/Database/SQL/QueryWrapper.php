@@ -60,7 +60,7 @@ class QueryWrapper
 	{
 		$insert_id = null;
 
-		if($values == null) $success = $this->pdo_stmt->execute();
+		if($values === null) $success = $this->pdo_stmt->execute();
 		else if(!is_array($values)) $success = $this->pdo_stmt->execute(array($values));
 		else $success = $this->pdo_stmt->execute($values);
 
