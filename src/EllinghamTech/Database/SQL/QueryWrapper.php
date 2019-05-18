@@ -30,7 +30,10 @@ class QueryWrapper
 		$this->pdo_stmt = $this->pdo->prepare($query);
 
 		if($this->pdo_stmt === null)
-			throw new QueryFailed($query, 'Statement returned NULL, possibly a query syntax error');
+			throw new QueryFailed($query, 'Statement is NULL, possibly a query syntax error');
+
+		if(is_bool($this->pdo_stmt))
+			throw new QueryFailed($query, 'Statement is BOOL, possibly a query syntax error');
 	}
 
 	/**
