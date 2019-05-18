@@ -23,7 +23,7 @@ interface IBasicSession
 	/**
 	 * Checks if any session messages exist for a $name
 	 *
-	 * @param string $name Message nem
+	 * @param string $name Message name
 	 * @return bool True if exists, false otherwise
 	 */
 	public function checkSessionMessages(string $name) : bool;
