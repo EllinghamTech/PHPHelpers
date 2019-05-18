@@ -28,6 +28,5 @@
 	  "EllinghamTech\\Templating\\": "src/EllinghamTech/Templating/",
 	  "EllinghamTech\\Exceptions\\": "src/EllinghamTech/Exceptions/"
 	}
-  },
-  "minimum-stability": "dev"
+  }
 }
