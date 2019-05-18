@@ -65,7 +65,7 @@ class QueryWrapper
 		else $success = $this->pdo_stmt->execute($values);
 
 		if(!$success)
-			throw new \Exception('Database query failed: '.json_encode($this->pdo_stmt->errorInfo()));
+			throw new QueryFailed('Database query failed: '.json_encode($this->pdo_stmt->errorInfo()));
 
 		$insert_id = $this->pdo->lastInsertId();
 

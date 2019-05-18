@@ -1,6 +1,8 @@
 <?php
 namespace EllinghamTech\Database\SQL;
 
+use EllinghamTech\Exceptions\Data\NoConnection;
+
 class Wrapper
 {
 	/** @var \PDO Database Object */
@@ -32,13 +34,15 @@ class Wrapper
 	 * Prepare a query and returns an \EllinghamTech\Database\QueryWrapper instance
 	 *
 	 * @param string $query_string The query to prepare
+	 *
 	 * @return QueryWrapper
 	 *
-	 * @throws /Exception
+	 * @throws NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
 	 */
 	public function prepare(string $query_string) : QueryWrapper
 	{
-		if($this->db_link == null) throw new \Exception('Not connected to database');
+		if($this->db_link == null) throw new NoConnection('Not connected to database');
 		return new QueryWrapper($this, $query_string);
 	}
 
@@ -47,13 +51,15 @@ class Wrapper
 	 *
 	 * @param string $query_string The query to perform
 	 * @param mixed $inputs The inputs to safely send to database
+	 *
 	 * @return ResultWrapper MySQLResult instance
 	 *
-	 * @throws \Exception
+	 * @throws NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
 	 */
 	public function performQuery(string $query_string, $inputs = null) : ResultWrapper
 	{
-		if($this->db_link == null) throw new \Exception('Not connected to database');
+		if($this->db_link == null) throw new NoConnection('Not connected to database');
 		$res = new QueryWrapper($this, $query_string);
 		return $res->execute($inputs);
 	}
@@ -63,11 +69,11 @@ class Wrapper
 	 *
 	 * @return bool
 	 *
-	 * @throws \Exception
+	 * @throws NoConnection
 	 */
 	public function transaction_begin() : bool
 	{
-		if($this->db_link == null) throw new \Exception('Not connected to database');
+		if($this->db_link == null) throw new NoConnection('Not connected to database');
 		return $this->db_link->beginTransaction();
 	}
 
@@ -76,11 +82,11 @@ class Wrapper
 	 *
 	 * @return bool
 	 *
-	 * @throws \Exception
+	 * @throws NoConnection
 	 */
 	public function transaction_rollback() : bool
 	{
-		if($this->db_link == null) throw new \Exception('Not connected to database');
+		if($this->db_link == null) throw new NoConnection('Not connected to database');
 		return $this->db_link->rollBack();
 	}
 
@@ -89,11 +95,11 @@ class Wrapper
 	 *
 	 * @return bool
 	 *
-	 * @throws \Exception
+	 * @throws NoConnection
 	 */
 	public function transaction_commit() : bool
 	{
-		if($this->db_link == null) throw new \Exception('Not connected to database');
+		if($this->db_link == null) throw new NoConnection('Not connected to database');
 		return $this->db_link->commit();
 	}
 
@@ -103,11 +109,11 @@ class Wrapper
 	 * @param string $name The savepoint name/identifier
 	 * @return bool
 	 *
-	 * @throws \Exception
+	 * @throws NoConnection
 	 */
 	public function transaction_savepointCreate(string $name) : bool
 	{
-		if($this->db_link == null) throw new \Exception('Not connected to database');
+		if($this->db_link == null) throw new NoConnection('Not connected to database');
 		return $this->db_link->query('SAVEPOINT '.$name);
 	}
 
@@ -117,11 +123,11 @@ class Wrapper
 	 * @param string $name The savepoint name/identifier
 	 * @return bool
 	 *
-	 * @throws \Exception
+	 * @throws NoConnection
 	 */
 	public function transaction_savepointRollback(string $name) : bool
 	{
-		if($this->db_link == null) throw new \Exception('Not connected to database');
+		if($this->db_link == null) throw new NoConnection('Not connected to database');
 		return $this->db_link->query('ROLLBACK TO '.$name);
 	}
 
