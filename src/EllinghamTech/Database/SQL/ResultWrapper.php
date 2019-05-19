@@ -1,16 +1,16 @@
 <?php
 namespace EllinghamTech\Database\SQL;
 
-class ResultWrapper
+final class ResultWrapper
 {
 	/** @var \PDOStatement Result */
 	protected $result;
 
 	/** @var bool Query Success */
-	public $success;
+	protected $success;
 
 	/** @var int After an insert query, this holds the value of the primary key using auto increment */
-	public $insert_id;
+	protected $insert_id;
 
 	/**
 	 * Set-up the instance
@@ -28,6 +28,8 @@ class ResultWrapper
 
 	/**
 	 * Returns the number of rows affected
+	 *
+	 * @return int
 	 */
 	public function numRows() : int
 	{
@@ -35,8 +37,10 @@ class ResultWrapper
 	}
 
 	/**
-	 * Returns the next row of data
-	 **/
+	 * Fetches the next row and returns it as associative array.
+	 *
+	 * @return array|null
+	 */
 	public function fetchArray() : ?array
 	{
 		$arr = $this->result->fetch(\PDO::FETCH_ASSOC);
@@ -47,18 +51,56 @@ class ResultWrapper
 	}
 
 	/**
+	 * Fetches the next row and returns it as an object.
+	 *
+	 * Fetches the next row and returns it as an object.  If a class name
+	 * is specified, the object returned will be an instance of the specified
+	 * class populated with data from columns matching property names.
+	 *
+	 * Protected and private properties are affected just like public properties.
+	 *
+	 * The constructor is called AFTER properties have been set.
+	 *
+	 * Will return NULL on failure.
+	 *
+	 * @param string $class_name
+	 * @param array $constructor_args
+	 *
+	 * @return object|null
+	 */
+	public function fetchObject(string $class_name = 'stdClass', array $constructor_args = array())
+	{
+		$obj = $this->result->fetchObject($class_name, $constructor_args);
+
+		if($obj === false) return null;
+		else return $obj;
+	}
+
+	/**
 	 * Returns error details
-	 **/
-	public function errorInfo()
+	 *
+	 * @return array
+	 */
+	public function errorInfo() : array
 	{
 		return $this->result->errorInfo();
 	}
 
+	/**
+	 * Returns true if this instance represents a successful query.
+	 *
+	 * @return bool
+	 */
 	public function isSuccess() : bool
 	{
 		return (bool)$this->success;
 	}
 
+	/**
+	 * Retrieves the insert ID if this result has one.  Otherwise null.
+	 *
+	 * @return int|null
+	 */
 	public function insertId() : ?int
 	{
 		return $this->insert_id;

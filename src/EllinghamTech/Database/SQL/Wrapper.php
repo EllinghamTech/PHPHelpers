@@ -2,14 +2,17 @@
 namespace EllinghamTech\Database\SQL;
 
 use EllinghamTech\Exceptions\Data\NoConnection;
+use EllinghamTech\Exceptions\Data\QueryFailed;
 
 class Wrapper
 {
 	/** @var \PDO Database Object */
 	public $db_link = null;
-	/** @var string Last Query Performed */
-	protected $last_query;
 
+	/** @var string Last Query Performed */
+	protected $last_query = null;
+
+	/** @var string Sets a specific identifier for the SQL Database type (such as MySQL, SQLite) */
 	public $database_type = 'SQL';
 
 	/**
@@ -20,7 +23,7 @@ class Wrapper
 	 *
 	 * @return bool False if $pdoObject param is not a valid PDO object
 	 */
-	public function useExistingConnection($pdoObject)
+	public function useExistingConnection($pdoObject) : bool
 	{
 		if(is_a($pdoObject, '\PDO'))
 			$this->db_link = $pdoObject;
@@ -37,8 +40,8 @@ class Wrapper
 	 *
 	 * @return QueryWrapper
 	 *
-	 * @throws NoConnection
-	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws NoConnection If no connection is present
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed If the query fails to prepare
 	 */
 	public function prepare(string $query_string) : QueryWrapper
 	{
@@ -54,8 +57,8 @@ class Wrapper
 	 *
 	 * @return ResultWrapper MySQLResult instance
 	 *
-	 * @throws NoConnection
-	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws NoConnection If no connection is present
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed If the query fails
 	 */
 	public function performQuery(string $query_string, $inputs = null) : ResultWrapper
 	{
@@ -69,7 +72,9 @@ class Wrapper
 	 *
 	 * @return bool
 	 *
-	 * @throws NoConnection
+	 * @throws NoConnection If no connection is present
+	 * @throws \PDOException If there is already a transaction started or
+	 * the driver does not support transactions
 	 */
 	public function transaction_begin() : bool
 	{
@@ -82,7 +87,8 @@ class Wrapper
 	 *
 	 * @return bool
 	 *
-	 * @throws NoConnection
+	 * @throws NoConnection If no connection is present
+	 * @throws \PDOException if there is no active transaction
 	 */
 	public function transaction_rollback() : bool
 	{
@@ -95,7 +101,8 @@ class Wrapper
 	 *
 	 * @return bool
 	 *
-	 * @throws NoConnection
+	 * @throws NoConnection If no connection is present
+	 * @throws \PDOException if there is no active transaction
 	 */
 	public function transaction_commit() : bool
 	{
@@ -109,12 +116,13 @@ class Wrapper
 	 * @param string $name The savepoint name/identifier
 	 * @return bool
 	 *
-	 * @throws NoConnection
+	 * @throws NoConnection If no connection is present
+	 * @throws QueryFailed If the Savepoint query fails
 	 */
 	public function transaction_savepointCreate(string $name) : bool
 	{
 		if($this->db_link == null) throw new NoConnection('Not connected to database');
-		return $this->db_link->query('SAVEPOINT '.$name);
+		return $this->performQuery('SAVEPOINT '.$name)->isSuccess();
 	}
 
 	/**
@@ -123,12 +131,13 @@ class Wrapper
 	 * @param string $name The savepoint name/identifier
 	 * @return bool
 	 *
-	 * @throws NoConnection
+	 * @throws NoConnection If no connection is present
+	 * @throws QueryFailed If the Savepoint query fails
 	 */
 	public function transaction_savepointRollback(string $name) : bool
 	{
 		if($this->db_link == null) throw new NoConnection('Not connected to database');
-		return $this->db_link->query('ROLLBACK TO '.$name);
+		return $this->performQuery('ROLLBACK TO '.$name)->isSuccess();
 	}
 
 	/**
