@@ -1,6 +1,8 @@
 <?php
 namespace EllinghamTech\Database\SQL;
 
+use EllinghamTech\Exceptions\Data\ConnectFailed;
+
 class SQLite extends Wrapper
 {
 	public function __construct()
@@ -9,11 +11,15 @@ class SQLite extends Wrapper
 	}
 
 	/**
-	 * Opens an SQLite connection using PDO_SQLITE
+	 * Opens an SQLite connection using PDO_SQLITE.
+	 *
+	 * Opens an SQLite connection using PDO_SQLITE.  Accepts a file
+	 * location as input or special SQLite locations, such as :memory:
+	 * for in-memory databases, that are compatible with PDO_SQLITE.
 	 *
 	 * @param string $sqlite_file_location Path to SQLite file
 	 *
-	 * @throws \Exception If cannot open/create
+	 * @throws \Exception If cannot open/create the database file
 	 */
 	public function connect(string $sqlite_file_location) : void
 	{
@@ -28,7 +34,7 @@ class SQLite extends Wrapper
 		catch(\PDOException $e)
 		{
 			$this->db_link = null;
-			throw new \Exception("Failed to open database: ".$e->getMessage());
+			throw new ConnectFailed('Failed to open/create database: '.$e->getMessage(), 0, $e);
 		}
 	}
 }
