@@ -3,10 +3,10 @@ namespace EllinghamTech\Database\SQL;
 
 use EllinghamTech\Exceptions\Data\QueryFailed;
 
-class QueryWrapper
+final class QueryWrapper
 {
 	/** @var Wrapper The Ellingham Wrapper Object */
-	protected $mysql;
+	protected $wrapper;
 	/** @var \PDO PDO Object */
 	protected $pdo;
 	/** @var string The query string */
@@ -25,15 +25,16 @@ class QueryWrapper
 	 */
 	public function __construct(Wrapper $parent, string $query)
 	{
-		$this->mysql = $parent;
+		$this->wrapper = $parent;
 		$this->pdo = $parent->getDBLink();
+		$this->query = $query;
 		$this->pdo_stmt = $this->pdo->prepare($query);
 
 		if($this->pdo_stmt === null)
-			throw new QueryFailed($query, 'Statement is NULL, possibly a query syntax error');
+			throw new QueryFailed($query, $this->wrapper,'Statement is NULL, possibly a query syntax error');
 
 		if(is_bool($this->pdo_stmt))
-			throw new QueryFailed($query, 'Statement is BOOL, possibly a query syntax error');
+			throw new QueryFailed($query, $this->wrapper, 'Statement is BOOL, possibly a query syntax error');
 	}
 
 	/**
@@ -57,7 +58,7 @@ class QueryWrapper
 	 * @param string|int|array Binds the values to the query
 	 * @return ResultWrapper Returns the query result
 	 *
-	 * @throws \Exception
+	 * @throws QueryFailed
 	 */
 	public function execute($values=null) : ResultWrapper
 	{
@@ -68,7 +69,7 @@ class QueryWrapper
 		else $success = $this->pdo_stmt->execute($values);
 
 		if(!$success)
-			throw new QueryFailed('Database query failed: '.json_encode($this->pdo_stmt->errorInfo()));
+			throw new QueryFailed($this->query, $this->wrapper,'Database query failed: '.json_encode($this->pdo_stmt->errorInfo()));
 
 		$insert_id = $this->pdo->lastInsertId();
 
