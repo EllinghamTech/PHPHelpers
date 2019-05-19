@@ -1,4 +1,3 @@
-**Warning: In Development and not complete**
 # Ellingham PHP Helpers
 Some PHP Helpers for common features used within PHP, such as Sessions and Databases.
 
@@ -10,6 +9,8 @@ Some PHP Helpers for common features used within PHP, such as Sessions and Datab
 
 Released under the MIT licence.  Use as you please but please include a copyright notice "Copyright (c) 2019 Ellingham Technologies Ltd".  This can be placed on a separate attribution page, warranties page, etc.  Under the MIT licence, we offer no warrenty for use of this library.  Public contributions to EllinghamTech/PHPHelpers are welcome.
 
+If there are any features you believe should be added, feel free to open an issue.
+
 ## Installation
 ### With Composer
 Using Composer (https://getcomposer.org) simply run
@@ -19,7 +20,7 @@ composer require ellingham-technologies/phphelpers
 
 or add this line to the require section of your composer.json file and use composer to update/install:
 ```
-"ellingham-technologies/phphelpers": "~0.4",
+"ellingham-technologies/phphelpers": "~0.5",
 ```
 
 *As this is early days, we should point out that the library is quite limited.  You can use the "dev-master" release (which is the latest and greatest) - but this could always lead to site-breakages if there is an error somewhere in the development library - so don't use on production sites.*
