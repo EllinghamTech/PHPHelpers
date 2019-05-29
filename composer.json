@@ -26,7 +26,8 @@
 	  "EllinghamTech\\Recaptcha\\": "src/EllinghamTech/Recaptcha/",
 	  "EllinghamTech\\Session\\": "src/EllinghamTech/Session/",
 	  "EllinghamTech\\Templating\\": "src/EllinghamTech/Templating/",
-	  "EllinghamTech\\Exceptions\\": "src/EllinghamTech/Exceptions/"
+	  "EllinghamTech\\Exceptions\\": "src/EllinghamTech/Exceptions/",
+	  "EllinghamTech\\Abstractions\\": "src/EllinghamTech/Abstractions/"
 	}
   }
 }
